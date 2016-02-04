@@ -41,8 +41,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     /**
      * Id to identity READ_CONTACTS permission request.
+     * private static final int REQUEST_READ_CONTACTS = 0;
      */
-    private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -57,24 +57,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    private AutoCompleteTextView mEmailView;    //The Email Address
+    private EditText mPasswordView;             //The Users' Password
+    private View mProgressView;                 //I Think this represents the "Loading" screen
+    private View mLoginFormView;                //Not sure...
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);                       //initialize Email feild
+        populateAutoComplete();                                                             //populates auto complete? (Cool Feature)
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mPasswordView = (EditText) findViewById(R.id.password);                             //initialize Password feild
+        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {     //Listening for password
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {   //Overriding Editor Action
+                if (id == R.id.login || id == EditorInfo.IME_NULL) {                        //Try to Sign-In as soon as password is complete
                     attemptLogin();
                     return true;
                 }
@@ -82,26 +82,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);       //initializes "Sign-In" button
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {                                                //When clicked, attempt login
                 attemptLogin();
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        mLoginFormView = findViewById(R.id.login_form);                                     //still not sure what this is...
+        mProgressView = findViewById(R.id.login_progress);                                  //initializes "Progress" icon
     }
 
-    private void populateAutoComplete() {
+    private void populateAutoComplete() {                                                   //Might as well leave this in
         if (!mayRequestContacts()) {
             return;
         }
 
-        getLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(0, null, this);                                       //Not touching that.. 
     }
 
+/**
+ *  May Consider using this code later on?
+ * 
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -123,10 +126,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         return false;
     }
-
+    */
     /**
      * Callback received when a permissions request has been completed.
-     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -136,6 +138,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }
     }
+    */
 
 
     /**
@@ -143,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void attemptLogin() {           //This is the authentication
         if (mAuthTask != null) {
             return;
         }
@@ -156,7 +159,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
+        boolean cancel = false;             //We have option to cancel?
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
@@ -190,12 +193,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private boolean isEmailValid(String email) {
+    private boolean isEmailValid(String email) {                //Email validation
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
-    private boolean isPasswordValid(String password) {
+    private boolean isPasswordValid(String password) {          //Password validation
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
