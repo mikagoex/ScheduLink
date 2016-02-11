@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);                       //initialize Email feild
-        populateAutoComplete();                                                             //populates auto complete? (Cool Feature)
+        //populateAutoComplete();                                                             //populates auto complete? (Cool Feature)
 
         mPasswordView = (EditText) findViewById(R.id.password);                             //initialize Password feild
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {     //Listening for password
@@ -94,6 +94,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);                                  //initializes "Progress" icon
     }
 
+    /**
+     * Keep track of the login task to ensure we can cancel it if requested.
+     *
     private void populateAutoComplete() {                                                   //Might as well leave this in
         if (!mayRequestContacts()) {
             return;
@@ -101,6 +104,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         getLoaderManager().initLoader(0, null, this);                                       //Not touching that.. 
     }
+     */
 
 /**
  *  May Consider using this code later on?
