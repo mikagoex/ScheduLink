@@ -30,11 +30,25 @@ public class MainPageActivity extends AppCompatActivity {
     }
 
 /*
-method that is called to switch activities
+Methods that are called to switch activities
  */
-    public void displayNewActivity(View v){
-        startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
+    public void displayGroupsActivity(View v){
+        startActivity(new Intent(MainPageActivity.this, GroupsActivity.class));
     }
+
+    public void displaySchedulinksActivity(View v){
+        startActivity(new Intent(MainPageActivity.this, SchedulinksActivity.class));
+    }
+
+    public void displayContactsActivity(View v){
+        startActivity(new Intent(MainPageActivity.this, ContactsActivity.class));
+    }
+
+    public void displayOptionsActivity(View v){
+        startActivity(new Intent(MainPageActivity.this, OptionsActivity.class));
+    }
+
+
 
 
 

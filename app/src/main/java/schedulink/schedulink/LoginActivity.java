@@ -3,9 +3,7 @@ package schedulink.schedulink;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -32,8 +30,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
 /**
  * A login screen that offers login via email/password.
  */
@@ -51,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -68,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);                       //initialize Email feild
-        populateAutoComplete();                                                             //populates auto complete? (Cool Feature)
+        //populateAutoComplete();                                                             //populates auto complete? (Cool Feature)
 
         mPasswordView = (EditText) findViewById(R.id.password);                             //initialize Password feild
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {     //Listening for password
@@ -94,7 +92,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);                                  //initializes "Progress" icon
     }
 
-    private void populateAutoComplete() {                                                   //Might as well leave this in
+
+
+    /*
+    method that is called to switch activities
+     */
+    public void displayNewActivity(View v){
+        startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
+    }
+
+
+
+
+
+
+
+/**
+ *  May Consider using this code later on?
+ *
+ private void populateAutoComplete() {                                                   //Might as well leave this in
         if (!mayRequestContacts()) {
             return;
         }
@@ -102,9 +118,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         getLoaderManager().initLoader(0, null, this);                                       //Not touching that.. 
     }
 
-/**
- *  May Consider using this code later on?
- * 
+
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;

@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main_page"
-    tools:context="schedulink.schedulink.MainPage">
+    tools:context=".MainPageActivity"
+    tools:showIn="@layout/activity_main_page">
+
+    //define button elements
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_groups_main_page"
+        android:id="@+id/groups_button"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp"
+        android:onClick="displayGroupsActivity"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_schedulinks_main_page"
+        android:id="@+id/schedules_button"
+        android:onClick="displaySchedulinksActivity"
+        android:layout_below="@+id/groups_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_contacts_main_page"
+        android:id="@+id/contacts_button"
+        android:onClick="displayContactsActivity"
+        android:layout_below="@+id/schedules_button"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_options_main_page"
+        android:id="@+id/options_button"
+        android:onClick="displayOptionsActivity"
+        android:layout_below="@+id/contacts_button"
+        android:layout_alignRight="@+id/contacts_button"
+        android:layout_alignEnd="@+id/contacts_button"
+        android:layout_alignLeft="@+id/contacts_button"
+        android:layout_alignStart="@+id/contacts_button" />
+
+
+
 
 </RelativeLayout>
