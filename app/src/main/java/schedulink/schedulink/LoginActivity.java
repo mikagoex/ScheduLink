@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -111,12 +112,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
  *  May Consider using this code later on?
  *
  private void populateAutoComplete() {                                                   //Might as well leave this in
+
         if (!mayRequestContacts()) {
             return;
         }
 
         getLoaderManager().initLoader(0, null, this);                                       //Not touching that.. 
     }
+
 
 
     private boolean mayRequestContacts() {

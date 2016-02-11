@@ -22,6 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity
             android:name=".MainPageActivity"
             android:label="@string/title_activity_main_page"
@@ -42,6 +43,10 @@
             android:name=".OptionsActivity"
             android:label="@string/title_activity_options"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+=======
+        <activity android:name=".LoginSuccess" />
+        <activity android:name=".ScheduleViewer"></activity>
+>>>>>>> tyler
     </application>
 
 </manifest>
