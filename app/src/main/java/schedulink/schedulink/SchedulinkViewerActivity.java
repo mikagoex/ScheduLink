@@ -1,6 +1,5 @@
 package schedulink.schedulink;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class SchedulinksActivity extends AppCompatActivity {
+public class SchedulinkViewerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedulinks);
+        setContentView(R.layout.activity_schedulink_viewer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -25,14 +24,6 @@ public class SchedulinksActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
-
-
-    /*
-Method that is called to switch activities
- */
-    public void displaySchedulinkViewerActivity(View v){
-        startActivity(new Intent(SchedulinksActivity.this, SchedulinkViewerActivity.class));
     }
 
 }
