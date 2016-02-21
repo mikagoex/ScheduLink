@@ -28,10 +28,13 @@
 
     <!-- Strings related to Groups Page -->
     <string name="title_activity_groups">GroupsActivity</string>
+    <string name="btn_groups_create_new">Create Group</string>
+
 
     <!-- Strings related to Schedulinks Page -->
     <string name="title_activity_schedulinks">SchedulinksActivity</string>
-    <string name="btn_groups_schedulinks_page">Go to Viewer</string>  <!-- for testing, remove later -->
+    <string name="btn_groups_schedulinks_page">Go to Viewer</string>
+    <!-- for testing, remove later -->
 
     <!-- Strings related to Contacts Page -->
     <string name="title_activity_contacts">ContactsActivity</string>
@@ -39,6 +42,7 @@
     <!-- Strings related to Options Page -->
     <string name="title_activity_options">OptionsActivity</string>
     <string name="title_activity_schedulink_viewer">SchedulinkViewerActivity</string>
+    <string name="title_activity_group">GroupActivity</string>
 
 
 </resources>
