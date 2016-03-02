@@ -1,11 +1,12 @@
 package schedulink.schedulink;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Michael on 16-02-18.
  */
-public class Uzer {
+public class Uzer implements Serializable{
 
     private String uid;
     private String name;

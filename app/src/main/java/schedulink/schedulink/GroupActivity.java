@@ -1,13 +1,17 @@
 package schedulink.schedulink;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 public class GroupActivity extends AppCompatActivity {
+
+    private TextView groupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,18 @@ public class GroupActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        Intent i = getIntent();
+        Group newGroup = (Group)i.getSerializableExtra("testGroup");
+
+        groupName = (TextView) findViewById(R.id.gname); //set our variable to the xml ID
+        groupName.setText(newGroup.getName());
+
+
+
+
+
     }
 
 }

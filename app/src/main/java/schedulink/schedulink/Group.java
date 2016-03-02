@@ -1,11 +1,12 @@
 package schedulink.schedulink;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Michael on 16-02-18.
  */
-public class Group {
+public class Group implements Serializable {
     private String gid;
     private String name;
     private Uzer owner;
