@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static schedulink.schedulink.weekview.WeekViewUtil.*; //Will bring in
+//import static schedulink.schedulink.weekview.WeekViewUtil.*; //Will bring in
 
 /**
  * Created by Raquib-ul-Alam Kanak on 7/21/2014.
@@ -171,7 +171,7 @@ public class WeekViewEvent {
     public int hashCode() {
         return (int) (mId ^ (mId >>> 32));
     }
-
+/**
     public List<WeekViewEvent> splitWeekViewEvents(){
         //This function splits the WeekViewEvent in WeekViewEvents by day
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
@@ -218,4 +218,5 @@ public class WeekViewEvent {
 
         return events;
     }
+ **/
 }
