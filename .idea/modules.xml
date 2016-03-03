@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScheduLink.iml" filepath="$PROJECT_DIR$/ScheduLink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScheduLink - Back up.iml" filepath="$PROJECT_DIR$/ScheduLink - Back up.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
