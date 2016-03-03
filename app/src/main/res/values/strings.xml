@@ -43,6 +43,10 @@
     <string name="title_activity_options">OptionsActivity</string>
     <string name="title_activity_schedulink_viewer">SchedulinkViewerActivity</string>
     <string name="title_activity_group">GroupActivity</string>
-
-
+    <!-- String related to Calendar Layout-->
+    <string name="title_activity_register">Register</string>
+    <string name="First_Name">First Name</string>
+    <string name="Full_Name">Full Name</string>
+    <string name="Display_Name">Display Name(Can be changed later)</string>
+    <string name="action_register">Register</string>
 </resources>
