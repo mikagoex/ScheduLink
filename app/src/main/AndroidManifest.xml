@@ -46,6 +46,10 @@
         <activity
             android:name=".SchedulinkViewerActivity"
             android:label="@string/title_activity_schedulink_viewer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GroupActivity"
+            android:label="@string/title_activity_group"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
