@@ -3,6 +3,8 @@ package schedulink.schedulink;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import schedulink.schedulink.weekview.Schedulink;
+
 /**
  * Created by Michael on 16-02-18.
  */
@@ -13,7 +15,16 @@ public class Uzer implements Serializable{
     private String email;
     private ArrayList<Uzer> contactList;
     private ArrayList<Group> groupList;
-    //private ArrayList<Schedulink> schedulinkLis;
+
+    public ArrayList<Schedulink> getSchedulinkList() {
+        return schedulinkList;
+    }
+
+    public void setSchedulinkList(ArrayList<Schedulink> schedulinkList) {
+        this.schedulinkList = schedulinkList;
+    }
+
+    private ArrayList<Schedulink> schedulinkList;
 
 
     public Uzer(String name, String email) {
