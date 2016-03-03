@@ -1,35 +1,29 @@
 package schedulink.schedulink;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import schedulink.schedulink.weekview.Schedulink;
 
 /**
  * Created by Michael on 16-02-18.
  */
-public class Uzer implements Serializable{
+public class Uzer implements Serializable {
 
     private String uid;
     private String name;
     private String email;
     private ArrayList<Uzer> contactList;
     private ArrayList<Group> groupList;
-
-    public ArrayList<Schedulink> getSchedulinkList() {
-        return schedulinkList;
-    }
-
-    public void setSchedulinkList(ArrayList<Schedulink> schedulinkList) {
-        this.schedulinkList = schedulinkList;
-    }
-
     private ArrayList<Schedulink> schedulinkList;
 
 
     public Uzer(String name, String email) {
         this.name = name;
         this.email = email;
+        contactList = new ArrayList<Uzer>();
+        groupList = new ArrayList<Group>();
+        schedulinkList = new ArrayList<Schedulink>();
         //set uid
     }
 
@@ -71,6 +65,14 @@ public class Uzer implements Serializable{
 
     public void setGroupList(ArrayList<Group> groupList) {
         this.groupList = groupList;
+    }
+
+    public ArrayList<Schedulink> getSchedulinkList() {
+        return schedulinkList;
+    }
+
+    public void setSchedulinkList(ArrayList<Schedulink> schedulinkList) {
+        this.schedulinkList = schedulinkList;
     }
 
     public void createGroup(String name){

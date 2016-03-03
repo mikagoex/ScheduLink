@@ -21,11 +21,17 @@ public class GroupsActivity extends AppCompatActivity {
 
 
     private Button button;
+    Global global;
+    Uzer newUser;
+
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_groups);
+
+        global=((Global)getApplicationContext());
+        newUser = global.getMainUzer();
 
         // components from content_groups.xml
         button = (Button) findViewById(R.id.button);
@@ -37,6 +43,10 @@ public class GroupsActivity extends AppCompatActivity {
                 showInputDialog();
             }
         });
+
+
+
+
     }
 
 
@@ -56,11 +66,11 @@ public class GroupsActivity extends AppCompatActivity {
 
                         //how to pass it to the next page?
 
-                        Uzer newUser = new Uzer("Mike", "temp@email.com"); //temp user
-                        Group newGroup = new Group(editText.getText().toString(), newUser);
-
+                        newUser.createGroup(editText.getText().toString());
+                        //Group newGroup = new Group(editText.getText().toString(), newUser);
+                        //newUser.joinGroup(newGroup);
                         Intent intent = new Intent(GroupsActivity.this, GroupActivity.class);
-                        intent.putExtra("testGroup", newGroup);
+                        //intent.putExtra("testGroup", newGroup);
                         startActivity(intent);
                     }
 
