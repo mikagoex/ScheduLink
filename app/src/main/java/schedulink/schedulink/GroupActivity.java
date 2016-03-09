@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 public class GroupActivity extends AppCompatActivity {
 
-    private TextView groupName;
+    TextView groupName;
+    TextView ownerName;
     Global global;
     Uzer newUser;
 
@@ -35,16 +36,13 @@ public class GroupActivity extends AppCompatActivity {
         newUser = global.getMainUzer();
 
 
-        //Intent i = getIntent();
-        //Group newGroup = (Group)i.getSerializableExtra("testGroup");
+        Group newGroup = global.getMainUzer().getGroupList().get(global.getMainUzer().getGroupList().size()-1); //get last group
 
-        Group newGroup = global.getMainUzer().getGroupList().get(0);
-
+        //display group info
         groupName = (TextView) findViewById(R.id.gname); //set our variable to the xml ID
         groupName.setText(newGroup.getName());
-
-
-
+        ownerName = (TextView) findViewById(R.id.oname);
+        ownerName.setText(newUser.getName());
 
 
     }

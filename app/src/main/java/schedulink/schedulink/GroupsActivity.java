@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class GroupsActivity extends AppCompatActivity {
 
-
+    //create instance variables
     private Button button;
     Global global;
     Uzer newUser;
@@ -30,12 +30,12 @@ public class GroupsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_groups);
 
+        //add the global object and retrieve uzer
         global=((Global)getApplicationContext());
         newUser = global.getMainUzer();
 
         // components from content_groups.xml
         button = (Button) findViewById(R.id.button);
-
         button.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -43,8 +43,6 @@ public class GroupsActivity extends AppCompatActivity {
                 showInputDialog();
             }
         });
-
-
 
 
     }
@@ -64,13 +62,9 @@ public class GroupsActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        //how to pass it to the next page?
-
+                        //creating new group and starting activity
                         newUser.createGroup(editText.getText().toString());
-                        //Group newGroup = new Group(editText.getText().toString(), newUser);
-                        //newUser.joinGroup(newGroup);
                         Intent intent = new Intent(GroupsActivity.this, GroupActivity.class);
-                        //intent.putExtra("testGroup", newGroup);
                         startActivity(intent);
                     }
 

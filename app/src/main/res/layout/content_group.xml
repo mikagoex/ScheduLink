@@ -85,11 +85,19 @@
         android:id="@+id/gname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/button"
         android:layout_toEndOf="@+id/button" />
 
+    <TextView
+        android:id="@+id/oname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignLeft="@+id/gname"
+        android:layout_alignStart="@+id/gname" />
 
 
 

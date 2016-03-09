@@ -10,7 +10,7 @@ public class Global extends Application {
     private Uzer mainUzer;
 
     public Global() {
-        this.mainUzer = new Uzer("Mike", "temp@email.com");;
+        this.mainUzer = new Uzer("Mike", "temp@email.com"); //temporary, remove later
     }
 
     public Uzer getMainUzer() {

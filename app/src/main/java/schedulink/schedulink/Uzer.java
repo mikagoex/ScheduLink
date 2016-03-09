@@ -1,14 +1,13 @@
 package schedulink.schedulink;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import schedulink.schedulink.weekview.Schedulink;
 
 /**
  * Created by Michael on 16-02-18.
  */
-public class Uzer implements Serializable {
+public class Uzer {
 
     private String uid;
     private String name;
