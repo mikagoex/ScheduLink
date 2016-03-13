@@ -12,6 +12,7 @@ public class Uzer {
     private String uid;
     private String name;
     private String email;
+    private Group viewedGroup;
     private ArrayList<Uzer> contactList;
     private ArrayList<Group> groupList;
     private ArrayList<Schedulink> schedulinkList;
@@ -26,13 +27,9 @@ public class Uzer {
         //set uid
     }
 
-    public String getUid() {
-        return uid;
-    }
+    public String getUid() { return uid; }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+    public void setUid(String uid) { this.uid = uid; }
 
     public String getName() {
         return name;
@@ -49,6 +46,10 @@ public class Uzer {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Group getViewedGroup() { return viewedGroup; }
+
+    public void setViewedGroup(Group viewedGroup) { this.viewedGroup = viewedGroup; }
 
     public ArrayList<Uzer> getContactList() {
         return contactList;
@@ -77,6 +78,7 @@ public class Uzer {
     public void createGroup(String name){
         Group newGroup = new Group(name, this);
         groupList.add(newGroup);
+        viewedGroup=newGroup;
     }
 
     public void joinGroup(Group group){

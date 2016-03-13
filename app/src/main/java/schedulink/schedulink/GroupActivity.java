@@ -7,12 +7,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class GroupActivity extends AppCompatActivity {
 
     TextView groupName;
     TextView ownerName;
+    private Button leaveGroupBtn;
     Global global;
     Uzer newUser;
 
@@ -36,7 +38,9 @@ public class GroupActivity extends AppCompatActivity {
         newUser = global.getMainUzer();
 
 
-        Group newGroup = global.getMainUzer().getGroupList().get(global.getMainUzer().getGroupList().size()-1); //get last group
+
+
+        Group newGroup = global.getMainUzer().getViewedGroup(); //get last group
 
         //display group info
         groupName = (TextView) findViewById(R.id.gname); //set our variable to the xml ID
@@ -44,7 +48,13 @@ public class GroupActivity extends AppCompatActivity {
         ownerName = (TextView) findViewById(R.id.oname);
         ownerName.setText(newUser.getName());
 
-
     }
+
+
+    public void leaveGroup(View v){
+        newUser.getGroupList().remove(newUser.getViewedGroup());
+        startActivity(new Intent(GroupActivity.this, GroupsActivity.class));
+    }
+
 
 }
