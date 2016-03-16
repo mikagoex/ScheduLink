@@ -57,5 +57,4 @@
             android:label="@string/title_activity_register" />
 
     </application>
-
 </manifest>
