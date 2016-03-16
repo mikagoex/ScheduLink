@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Schedulink Beta 1.0.0.0</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!--temp to get to the main page from login, remove later -->
+    <string name="btn_temp_main_login_page">Register</string>
+
+
+    <!-- Strings related to Main Page -->
+    <string name="title_activity_main_page">MainPage</string>
+    <string name="btn_groups_main_page">Groups</string>
+    <string name="btn_schedulinks_main_page">Schedulinks</string>
+    <string name="btn_contacts_main_page">Contacts</string>
+    <string name="btn_options_main_page">Options</string>
+
+
+    <!-- Strings related to Groups Page -->
+    <string name="title_activity_groups">GroupsActivity</string>
+    <string name="btn_groups_create_new">Create Group</string>
+
+
+    <!-- Strings related to Schedulinks Page -->
+    <string name="title_activity_schedulinks">SchedulinksActivity</string>
+    <string name="btn_groups_schedulinks_page">Go to Viewer</string>
+    <!-- for testing, remove later -->
+
+    <!-- Strings related to Contacts Page -->
+    <string name="title_activity_contacts">ContactsActivity</string>
+
+    <!-- Strings related to Options Page -->
+    <string name="title_activity_options">OptionsActivity</string>
+    <string name="title_activity_schedulink_viewer">SchedulinkViewerActivity</string>
+    <string name="title_activity_group">GroupActivity</string>
+    <!-- String related to Calendar Layout-->
+    <string name="title_activity_register">Register</string>
+    <string name="First_Name">First Name</string>
+    <string name="Full_Name">Full Name</string>
+    <string name="Display_Name">Display Name(Can be changed later)</string>
+    <string name="action_register">Register</string>
+    <string name="back_button_reg">Back</string>
+</resources>
