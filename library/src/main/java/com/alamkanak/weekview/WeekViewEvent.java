@@ -1,4 +1,4 @@
-package schedulink.schedulink.weekview;
+package com.alamkanak.weekview;
 
 import java.util.ArrayList;
 import java.util.Calendar;
