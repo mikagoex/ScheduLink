@@ -1,8 +1,9 @@
-package schedulink.schedulink.weekview;
+package com.alamkanak.weekview;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import static com.alamkanak.weekview.WeekViewUtil.*;
 
 /**
@@ -170,6 +171,7 @@ public class WeekViewEvent {
     public int hashCode() {
         return (int) (mId ^ (mId >>> 32));
     }
+
     public List<WeekViewEvent> splitWeekViewEvents(){
         //This function splits the WeekViewEvent in WeekViewEvents by day
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
