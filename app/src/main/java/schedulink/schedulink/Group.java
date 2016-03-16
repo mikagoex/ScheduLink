@@ -82,4 +82,9 @@ public class Group implements Serializable {
         memberList.clear();
         //else do nothing
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }

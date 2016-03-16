@@ -27,6 +27,7 @@ public class MainPageActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
     }
 
 /*
