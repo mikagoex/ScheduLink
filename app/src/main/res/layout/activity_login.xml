@@ -81,8 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/btn_temp_main_login_page"
-                android:textStyle="bold"
-                android:onClick="displayNewActivity"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

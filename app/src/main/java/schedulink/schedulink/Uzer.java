@@ -9,17 +9,21 @@ import schedulink.schedulink.weekview.Schedulink;
  */
 public class Uzer {
 
-    private String uid;
-    private String name;
+    private String key;
+    private String displayName;
     private String email;
     private Group viewedGroup;
     private ArrayList<Uzer> contactList;
     private ArrayList<Group> groupList;
     private ArrayList<Schedulink> schedulinkList;
 
+    //empty constructor for firebase
+    public Uzer(){
 
-    public Uzer(String name, String email) {
-        this.name = name;
+    }
+
+    public Uzer(String displayName, String email) {
+        this.displayName = displayName;
         this.email = email;
         contactList = new ArrayList<Uzer>();
         groupList = new ArrayList<Group>();
@@ -27,16 +31,16 @@ public class Uzer {
         //set uid
     }
 
-    public String getUid() { return uid; }
+    public String getKey() { return key; }
 
-    public void setUid(String uid) { this.uid = uid; }
+    public void setKey(String key) { this.key = key; }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getEmail() {
@@ -76,7 +80,7 @@ public class Uzer {
     }
 
     public void createGroup(String name){
-        Group newGroup = new Group(name, this);
+        Group newGroup = new Group(displayName, this);
         groupList.add(newGroup);
         viewedGroup=newGroup;
     }

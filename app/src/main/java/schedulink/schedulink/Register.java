@@ -3,6 +3,7 @@ package schedulink.schedulink;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -28,8 +29,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -58,7 +66,6 @@ public class Register extends AppCompatActivity implements LoaderCallbacks<Curso
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private EditText mFirstNameView;
     private EditText mDisplayNameView;
     private View mProgressView;
     private View mLoginFormView;
@@ -69,9 +76,7 @@ public class Register extends AppCompatActivity implements LoaderCallbacks<Curso
         setContentView(R.layout.activity_register);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.new_email);//Email
-        mFirstNameView = (EditText) findViewById(R.id.new_Name);        //First Name
         mDisplayNameView = (EditText) findViewById(R.id.display_name);  //Display Name
-
         mPasswordView = (EditText) findViewById(R.id.new_password);     //Password
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -84,11 +89,19 @@ public class Register extends AppCompatActivity implements LoaderCallbacks<Curso
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.register_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        Button mBack = (Button) findViewById(R.id.back_button);
+        mBack.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Register.this, LoginActivity.class));
             }
         });
 
@@ -114,7 +127,11 @@ public class Register extends AppCompatActivity implements LoaderCallbacks<Curso
 
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
+        //System.out.println("Email is: " + email);
         String password = mPasswordView.getText().toString();
+        //System.out.println("Password is: " + password);
+        String displayName = mDisplayNameView.getText().toString();
+        //System.out.println("Display is: " + displayName);
 
         boolean cancel = false;
         View focusView = null;
@@ -145,8 +162,8 @@ public class Register extends AppCompatActivity implements LoaderCallbacks<Curso
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask = new UserLoginTask(email, password, displayName);
+            mAuthTask.execute();
         }
     }
     private boolean isEmailValid(String email) {
@@ -253,51 +270,87 @@ public class Register extends AppCompatActivity implements LoaderCallbacks<Curso
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Uzer, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
+        private String mEmail;
+        private String mPassword;
+        private String mDisplay;
+        private Firebase ref;
+        private boolean taken;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password, String displayName) {
             mEmail = email;
             mPassword = password;
+            mDisplay = displayName;
+            ref = new Firebase("https://schedulink.firebaseio.com");
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+        protected Boolean doInBackground(Uzer... params) {
+                ref.createUser(this.mEmail, this.mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
+                    @Override
+                    public void onSuccess(Map<String, Object> result) {
+                        //System.out.println("CREATED USER--------------------------------------------");
+                        ref.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
+                            @Override
+                            public void onAuthenticated(AuthData authData) {
+                               // System.out.println("MADE IT TO ON AUTH----------------");
+                                Map<String, String> m = new HashMap<>();
+                                m.put("Display", mDisplay);
+                                ref.child("Users").child(authData.getUid()).setValue(m);
+                            }
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+                            @Override
+                            public void onAuthenticationError(FirebaseError firebaseError) {
+                                //System.out.println("Failed Auth ------------------------------");
+                                switch (firebaseError.getCode()) {
+                                    case FirebaseError.INVALID_CREDENTIALS:
+                                       // System.out.println("Invalid Creds yo......................................");
+                                        onCancelled();
+                                        mEmailView.setError("Invalid Credentials");
+                                        break;
+                                    default:
+                                        //System.out.println("Some other issue : " + firebaseError.getDetails());
+                                        onCancelled();
+                                        mEmailView.setError("Some other problem");
+                                        break;
+                                }
+                            }
+                        });
+                        startActivity(new Intent(Register.this, MainPageActivity.class));
+                    }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
+                    @Override
+                    public void onError(FirebaseError firebaseError) {
+                        switch (firebaseError.getCode()) {
+                            case FirebaseError.INVALID_EMAIL:
+                                onCancelled();
+                                mEmailView.setError("Invalid Email Address");
+                                break;
+                            case FirebaseError.INVALID_PASSWORD:
+                                onCancelled();
+                                mPasswordView.setError("Invalid Password");
+                                break;
+                            case FirebaseError.NETWORK_ERROR:
+                                onCancelled();
+                                mEmailView.setError("Network Error, please try again");
+                                break;
+                            case FirebaseError.EMAIL_TAKEN:
+                                onCancelled();
+                                mEmailView.setError("Email is already taken");
+                                break;
+                            case FirebaseError.EXPIRED_TOKEN:
+                                onCancelled();
+                                mEmailView.setError("Your token is expired, please sign in again.");
+                            default:
+                                onCancelled();
+                                mEmailView.setError("Unknown Database Error");
+                        }
+                    }
+                });
             return true;
         }
 
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
 
         @Override
         protected void onCancelled() {

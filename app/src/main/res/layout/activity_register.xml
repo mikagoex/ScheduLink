@@ -65,14 +65,6 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/new_Name"
-                android:hint="@string/Full_Name" />
-
-            <EditText
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/display_name"
                 android:layout_gravity="center_horizontal"
@@ -87,6 +79,14 @@
                 android:text="@string/action_register"
                 android:textStyle="bold"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:id="@+id/back_button"
+                android:layout_gravity="center_horizontal" />
+
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

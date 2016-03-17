@@ -46,7 +46,7 @@ public class GroupActivity extends AppCompatActivity {
         groupName = (TextView) findViewById(R.id.gname); //set our variable to the xml ID
         groupName.setText(newGroup.getName());
         ownerName = (TextView) findViewById(R.id.oname);
-        ownerName.setText(newUser.getName());
+        ownerName.setText(newUser.getDisplayName());
 
     }
 

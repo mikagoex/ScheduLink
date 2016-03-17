@@ -28,8 +28,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A login screen that offers login via email/password.
@@ -60,11 +66,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;             //The Users' Password
     private View mProgressView;                 //I Think this represents the "Loading" screen
     private View mLoginFormView;                //Not sure...
+    private boolean loginSuccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Set context for Firebase connection - IMPORTANT
+        Firebase.setAndroidContext(this);
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);                       //initialize Email feild
         //populateAutoComplete();                                                             //populates auto complete? (Cool Feature)
@@ -89,23 +99,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button mRegister = (Button) findViewById(R.id.temp_main_page_button);
+        mRegister.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, Register.class));
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);                                     //still not sure what this is...
         mProgressView = findViewById(R.id.login_progress);                                  //initializes "Progress" icon
     }
-
-
-
-    /*
-    method that is called to switch activities
-     */
-    public void displayNewActivity(View v){
-        startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
-    }
-
-
-
-
-
 
 
 /**
@@ -206,7 +210,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            try {
+                mAuthTask.execute().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -316,49 +326,71 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
+        private String mEmail;
+        private String mPassword;
+        private Firebase ref;
+        private boolean toReturn;
 
         UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
+            this.mEmail = email;
+            this.mPassword = password;
+            ref = new Firebase("https://schedulink.firebaseio.com");
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+            Firebase.AuthResultHandler authResultHandler = new Firebase.AuthResultHandler(){
+                @Override
+                public void onAuthenticated(AuthData authData) {
+                    UserLoginTask.this.toReturn = true;
+                    Map m = authData.getAuth();
+                    System.out.println("The map contains:  " + m.toString());
+                    startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
                 }
-            }
 
-            // TODO: register the new account here.
-            return true;
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    switch(firebaseError.getCode())
+                    {
+                        case FirebaseError.INVALID_EMAIL:
+                            onCancelled();
+                            mPasswordView.setError("Email was invalid");
+                            break;
+                        case FirebaseError.INVALID_PASSWORD:
+                            onCancelled();
+                            mPasswordView.setError("Password was invalid");
+                            break;
+                        case FirebaseError.USER_DOES_NOT_EXIST:
+                            onCancelled();
+                            mPasswordView.setError("User does not exist");
+                            break;
+                        case FirebaseError.NETWORK_ERROR:
+                            onCancelled();
+                            mPasswordView.setError("Network Error. Please retry.");
+                            break;
+                        default:
+                            onCancelled();
+                            mPasswordView.setError("Other error");
+                            break;
+                    }
+                }
+            };
+            ref.authWithPassword(this.mEmail, this.mPassword, authResultHandler);
+            return toReturn;
         }
 
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
+//        @Override
+//        protected void onPostExecute(Boolean success) {
+//            mAuthTask = null;
+//            showProgress(false);
+//
+//            if (success) {
+//                finish();
+//            } else {
+//                mPasswordView.setError(getString(R.string.error_incorrect_password));
+//                mPasswordView.requestFocus();
+//            }
+//        }
 
         @Override
         protected void onCancelled() {
