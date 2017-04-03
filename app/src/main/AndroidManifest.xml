@@ -47,8 +47,7 @@
         <activity android:name=".LoginSuccess" />
         <activity
             android:name=".SchedulinkViewerActivity"
-            android:label="@string/title_activity_schedulink_viewer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_schedulink_viewer" />
         <activity
             android:name=".GroupActivity"
             android:label="@string/title_activity_group"
@@ -56,6 +55,10 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register" />
+        <activity
+            android:name=".AddEvent"
+            android:label="@string/title_activity_add_event"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

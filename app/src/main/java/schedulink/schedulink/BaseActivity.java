@@ -1,5 +1,6 @@
 package schedulink.schedulink;
 
+import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -147,7 +148,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, event.getLocation(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -156,8 +157,22 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     }
 
     @Override
-    public void onEmptyViewLongPress(Calendar time) {
+    /**
+     public void onEmptyViewLongPress(Calendar time) {
         Toast.makeText(this, "Empty view long pressed: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
+    }
+     */
+    public void onEmptyViewLongPress(Calendar time) {
+        Intent sweetSweetIntent = new Intent(BaseActivity.this, AddEvent.class);
+        String timeString = String.format("%02d:%02d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
+        sweetSweetIntent.putExtra("Time", timeString);
+        int dateString = time.get(Calendar.DAY_OF_MONTH);
+        sweetSweetIntent.putExtra("Day", dateString);
+        int monthString = time.get(Calendar.MONTH);
+        sweetSweetIntent.putExtra("Month", monthString);
+        int yearString = time.get(Calendar.YEAR);
+        sweetSweetIntent.putExtra("Year", yearString);
+        startActivity(sweetSweetIntent);
     }
 
     public WeekView getWeekView() {

@@ -3,20 +3,17 @@ package schedulink.schedulink;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -47,14 +44,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * private static final int REQUEST_READ_CONTACTS = 0;
      */
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -77,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);                       //initialize Email feild
-        //populateAutoComplete();                                                             //populates auto complete? (Cool Feature)
+        //populateAutoComplete();                                                           //populates auto complete? (Cool Feature)
 
         mPasswordView = (EditText) findViewById(R.id.password);                             //initialize Password feild
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {     //Listening for password
@@ -110,56 +99,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);                                     //still not sure what this is...
         mProgressView = findViewById(R.id.login_progress);                                  //initializes "Progress" icon
     }
-
-
-/**
- *  May Consider using this code later on?
- *
- private void populateAutoComplete() {                                                   //Might as well leave this in
-
-        if (!mayRequestContacts()) {
-            return;
-        }
-
-        getLoaderManager().initLoader(0, null, this);                                       //Not touching that.. 
-    }
-
-
-
-    private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        return false;
-    }
-    */
-    /**
-     * Callback received when a permissions request has been completed.
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
-    }
-    */
 
 
     /**
@@ -344,7 +283,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onAuthenticated(AuthData authData) {
                     UserLoginTask.this.toReturn = true;
                     Map m = authData.getAuth();
-                    System.out.println("The map contains:  " + m.toString());
+                    //System.out.println("The map contains:  " + m.toString());             Assuming this is a debug
                     startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
                 }
 
