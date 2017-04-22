@@ -45,6 +45,7 @@ public class AddEvent extends AppCompatActivity {
             timeString = (String) savedInstanceState.getSerializable("Time");
         }
 
+
         eventName = (EditText) findViewById(R.id.editText2);
         eventDescription = (EditText) findViewById(R.id.editText3);
         eventTime = (EditText) findViewById(R.id.editText);
@@ -94,6 +95,8 @@ public class AddEvent extends AppCompatActivity {
         WeekViewEvent event = new WeekViewEvent(1, eventName.getText().toString(), startTime, endTime);
         event.setLocation(eventDescription.getText().toString());
         event.setColor(-477870);
+
+        global.getUser();
 
         global.addEventToSched(event);
     }
