@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "281825114396",
+    "firebase_url": "https://schedulink.firebaseio.com",
+    "project_id": "firebase-schedulink",
+    "storage_bucket": "firebase-schedulink.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281825114396:android:01d40f731ecd6e89",
+        "android_client_info": {
+          "package_name": "schedulink.schedulink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281825114396-1dsq4c8128dg3k32j9i9d6od3n5e0vnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyAtrODzLws9kIbXDNetUKnlWeclJTxfA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

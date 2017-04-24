@@ -17,6 +17,7 @@ public class AddEvent extends AppCompatActivity {
     private EditText eventDescription;
     private EditText eventTime;
     private EditText eventDate;
+    private EditText eventLength;
     private Global global;
 
     @Override
@@ -49,6 +50,7 @@ public class AddEvent extends AppCompatActivity {
         eventName = (EditText) findViewById(R.id.editText2);
         eventDescription = (EditText) findViewById(R.id.editText3);
         eventTime = (EditText) findViewById(R.id.editText);
+        eventLength = (EditText) findViewById(R.id.editText5);
 
         String[] timeList = timeString.split(":");
         if(Integer.parseInt(timeList[1]) < 15){timeList[1] = "00";}
@@ -83,6 +85,7 @@ public class AddEvent extends AppCompatActivity {
         String[] newDate = fullDate.split("/");
         String fullTime = eventTime.getText().toString();
         String[] newTime = fullTime.split(":");
+        int length = Integer.parseInt(eventLength.getText().toString());
 
         Calendar startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(newTime[0]));
@@ -91,12 +94,10 @@ public class AddEvent extends AppCompatActivity {
         startTime.set(Calendar.MONTH, Integer.parseInt(newDate[1]));
         startTime.set(Calendar.YEAR, Integer.parseInt(newDate[2]));
         Calendar endTime = (Calendar) startTime.clone();
-        endTime.add(Calendar.HOUR, 1);
+        endTime.add(Calendar.HOUR, length);
         WeekViewEvent event = new WeekViewEvent(1, eventName.getText().toString(), startTime, endTime);
         event.setLocation(eventDescription.getText().toString());
         event.setColor(-477870);
-
-        global.getUser();
 
         global.addEventToSched(event);
     }

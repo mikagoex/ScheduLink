@@ -3,7 +3,8 @@ package schedulink.schedulink;
 import android.app.Application;
 
 import com.alamkanak.weekview.WeekViewEvent;
-import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,12 +21,12 @@ public class Global extends Application {
     private Schedulink sched;
     private int newMonth;
     private int newYear;
-    private Firebase ref;
+
 
     public Global() {
         this.mainUzer = new Uzer("Mike", "temp@email.com"); //temporary, remove later
         sched = new Schedulink();
-        ref = new Firebase("https://schedulink.firebaseio.com");
+        //Firebase.setAndroidContext(this);
     }
 
     public Uzer getMainUzer() {
@@ -46,18 +47,25 @@ public class Global extends Application {
         sched = newGuy;
     }
 
+    public void FirebaseTest(){
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("message");
+//
+//        myRef.setValue("Hello, World!");
+    }
+
     public void setTime(int inputMonth, int inputYear)
     {
         this.newMonth = inputMonth;
         this.newYear = inputYear;
     }
 
-    public void getUser(){
-        //FirebaseUser user = firebaseAuth.getCurrentUser();
-    }
-
     public void addEventToSched(WeekViewEvent event)
     {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
         sched.addEventToSchedulink(event);
     }
 
