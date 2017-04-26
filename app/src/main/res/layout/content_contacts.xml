@@ -25,7 +25,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Contacts"
+        android:text="Add Contact"
         android:id="@+id/button4"
         android:layout_marginBottom="88dp"
         android:layout_alignParentBottom="true"
@@ -35,7 +35,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView3"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView6"
+        android:layout_above="@+id/editText6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editText6"
         android:layout_above="@+id/button4"
-        android:layout_below="@+id/textView6" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

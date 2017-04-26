@@ -17,6 +17,7 @@ public class WeekViewEvent {
     private String mLocation;
     private int mColor;
     private boolean mAllDay;
+    private String ownerName;
 
     public WeekViewEvent(){
 

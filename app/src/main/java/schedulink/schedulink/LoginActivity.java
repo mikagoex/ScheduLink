@@ -272,6 +272,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private String mPassword;
         private Firebase ref;
         private boolean toReturn;
+        private Global global;
 
         UserLoginTask(String email, String password) {
             this.mEmail = email;
@@ -285,8 +286,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onAuthenticated(AuthData authData) {
                     UserLoginTask.this.toReturn = true;
+                    global=((Global)getApplicationContext());
                     Map m = authData.getAuth();
                     //System.out.println("The map contains:  " + m.toString());             Assuming this is a debug
+                    global.setUser(mEmail);
                     startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
                 }
 

@@ -18,6 +18,7 @@ public class WeekViewEvent {
     private String mLocation;
     private int mColor;
     private boolean mAllDay;
+    private String owner;
 
     public WeekViewEvent(){
 
@@ -218,4 +219,10 @@ public class WeekViewEvent {
 
         return events;
     }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getOwner(){return owner;}
 }
